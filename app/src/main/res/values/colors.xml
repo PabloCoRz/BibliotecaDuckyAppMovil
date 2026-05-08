@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navy">#17222D</color>
+    <color name="stone">#7f7e76</color>
+    <color name="gold">#ccb581</color>
+    <color name="cream">#f4eed8</color>
+    <color name="white">#FFFFFF</color>
+    <color name="green_disponible">#15803d</color>
+    <color name="red_nodisponible">#dc2626</color>
+</resources>
