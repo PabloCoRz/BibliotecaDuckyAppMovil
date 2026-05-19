@@ -5,18 +5,22 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-/**
- * Base de datos Room de la aplicación.
- * Singleton: se crea una sola instancia durante el ciclo de vida del proceso.
- */
 @Database(
-    entities = [LibroEntity::class],
-    version = 1,
+    entities = [
+        LibroEntity::class,
+        UsuarioEntity::class,
+        PrestamoEntity::class,
+        MultaEntity::class
+    ],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun libroDao(): LibroDao
+    abstract fun usuarioDao(): UsuarioDao
+    abstract fun prestamoDao(): PrestamoDao
+    abstract fun multaDao(): MultaDao
 
     companion object {
         @Volatile
@@ -28,7 +32,10 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "ducky_biblioteca.db"
-                ).build().also { INSTANCE = it }
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+                    .also { INSTANCE = it }
             }
         }
     }

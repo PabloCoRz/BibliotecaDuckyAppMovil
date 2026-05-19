@@ -38,7 +38,22 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginBottom="32dp" />
+            android:layout_marginBottom="24dp" />
+
+        <!-- Nombre (campo nuevo) -->
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input_auth"
+            android:hint="Nombre completo"
+            android:textColorHint="@color/stone"
+            android:textColor="@color/navy"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            android:layout_marginBottom="12dp" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -73,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@drawable/bg_button_dark"
-            android:text="Sign Up"
+            android:text="Crear Cuenta"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"

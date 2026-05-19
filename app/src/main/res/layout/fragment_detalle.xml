@@ -44,7 +44,7 @@
 
             </LinearLayout>
 
-            <!-- Cover + title block -->
+            <!-- Cover + titulo + estado + botón préstamo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,11 +100,27 @@
                         android:textStyle="bold"
                         android:layout_marginTop="8dp" />
 
+                    <!-- Botón préstamo en detalle (cambio #5) -->
+                    <TextView
+                        android:id="@+id/btnSolicitarPrestamo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_button_gold"
+                        android:text="Solicitar Préstamo"
+                        android:textColor="@color/navy"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone" />
+
                 </LinearLayout>
 
             </LinearLayout>
 
-            <!-- Metadata section -->
+            <!-- Metadata -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,263 +129,59 @@
                 android:layout_marginTop="8dp"
                 android:padding="20dp">
 
-                <!-- Authors -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Autores"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtAutoresDetalle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Autores" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtAutoresDetalle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Editorial -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Editorial"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtEditorial"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Editorial" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtEditorial" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Edición -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Edición"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtEdicion"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Edición" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtEdicion" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Año -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Año"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtAnioDetalle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Año" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtAnioDetalle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Categoría -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Categoría"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtCategoriaDetalle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Categoría" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtCategoriaDetalle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Idioma -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Idioma"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtIdioma"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Idioma" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtIdioma" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Copias -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Total copias"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtCopias"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Total copias" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtCopias" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Disponibles -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Disponibles"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtDisponibles"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Disponibles" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtDisponibles" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Pasillo (oculto por defecto) -->
-                <LinearLayout
-                    android:id="@+id/layoutPasillo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Pasillo"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtPasillo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:id="@+id/layoutPasillo" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp" android:visibility="gone">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Pasillo" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtPasillo" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Estante (oculto por defecto) -->
-                <LinearLayout
-                    android:id="@+id/layoutEstante"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="12dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Estante"
-                        android:textColor="@color/stone"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/txtEstante"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/navy"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
+                <LinearLayout android:id="@+id/layoutEstante" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp" android:visibility="gone">
+                    <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:text="Estante" android:textColor="@color/stone" android:textSize="13sp" />
+                    <TextView android:id="@+id/txtEstante" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/navy" android:textSize="13sp" android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <!-- Descripción (oculta por defecto) -->
+            <!-- Descripción -->
             <LinearLayout
                 android:id="@+id/layoutDescripcion"
                 android:layout_width="match_parent"
@@ -403,7 +215,6 @@
 
     </ScrollView>
 
-    <!-- Loading overlay centrado -->
     <ProgressBar
         android:id="@+id/progressBarDetalle"
         android:layout_width="wrap_content"

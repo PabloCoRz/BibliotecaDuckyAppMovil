@@ -9,16 +9,13 @@
         android:id="@+id/loginFragment"
         android:name="com.pablo.ducky.ui.auth.LoginFragment"
         android:label="Login">
-        <action
-            android:id="@+id/action_login_to_landing"
+        <action android:id="@+id/action_login_to_landing"
             app:destination="@id/landingFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_login_to_signup"
+        <action android:id="@+id/action_login_to_signup"
             app:destination="@id/signupFragment" />
-        <action
-            android:id="@+id/action_login_to_forgot"
+        <action android:id="@+id/action_login_to_forgot"
             app:destination="@id/forgotPasswordFragment" />
     </fragment>
 
@@ -26,8 +23,7 @@
         android:id="@+id/signupFragment"
         android:name="com.pablo.ducky.ui.auth.SignupFragment"
         android:label="Signup">
-        <action
-            android:id="@+id/action_signup_to_login"
+        <action android:id="@+id/action_signup_to_login"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
@@ -42,28 +38,23 @@
         android:id="@+id/landingFragment"
         android:name="com.pablo.ducky.ui.landing.LandingFragment"
         android:label="Landing">
-        <argument
-            android:name="query"
-            app:argType="string"
-            android:defaultValue="" />
-        <action
-            android:id="@+id/action_landing_to_search"
+        <argument android:name="query" app:argType="string" android:defaultValue="" />
+        <action android:id="@+id/action_landing_to_search"
             app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_landing_to_detalle"
+        <action android:id="@+id/action_landing_to_detalle"
             app:destination="@id/detalleFragment" />
+        <action android:id="@+id/action_landing_to_prestamos"
+            app:destination="@id/prestamosFragment" />
+        <action android:id="@+id/action_landing_to_multas"
+            app:destination="@id/multasFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.pablo.ducky.ui.search.SearchFragment"
         android:label="Buscar Libros">
-        <argument
-            android:name="query"
-            app:argType="string"
-            android:defaultValue="" />
-        <action
-            android:id="@+id/action_search_to_detalle"
+        <argument android:name="query" app:argType="string" android:defaultValue="" />
+        <action android:id="@+id/action_search_to_detalle"
             app:destination="@id/detalleFragment" />
     </fragment>
 
@@ -71,9 +62,19 @@
         android:id="@+id/detalleFragment"
         android:name="com.pablo.ducky.ui.detail.DetalleFragment"
         android:label="Detalle">
-        <argument
-            android:name="libroId"
-            app:argType="integer" />
+        <argument android:name="libroId" app:argType="integer" />
+        <action android:id="@+id/action_detalle_to_prestamos"
+            app:destination="@id/prestamosFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/prestamosFragment"
+        android:name="com.pablo.ducky.ui.prestamos.PrestamosFragment"
+        android:label="Mis Préstamos" />
+
+    <fragment
+        android:id="@+id/multasFragment"
+        android:name="com.pablo.ducky.ui.multas.MultasFragment"
+        android:label="Mis Multas" />
 
 </navigation>
