@@ -50,12 +50,6 @@ class LoginFragment : Fragment() {
         binding.btnGoSignup.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_signup)
         }
-
-        binding.tvForgotPassword.paintFlags =
-            binding.tvForgotPassword.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-        binding.tvForgotPassword.setOnClickListener {
-            findNavController().navigate(R.id.action_login_to_forgot)
-        }
     }
 
     override fun onDestroyView() {
