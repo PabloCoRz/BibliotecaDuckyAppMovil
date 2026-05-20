@@ -1,17 +1,22 @@
 package com.pablo.ducky.ui.search
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pablo.ducky.DuckyApp
+import com.pablo.ducky.data.local.entity.PrestamoEntity
 import com.pablo.ducky.data.model.Libro
 import com.pablo.ducky.data.repository.LibroRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel(app: Application) : AndroidViewModel(app) {
+
     private val repo = LibroRepository()
+    private val dao by lazy { (getApplication<DuckyApp>()).database.prestamoDao() }
 
     private val _libros = MutableLiveData<List<Libro>>(emptyList())
     val libros: LiveData<List<Libro>> = _libros
@@ -39,6 +44,23 @@ class SearchViewModel : ViewModel() {
                 onFailure = { _error.value = "Error al conectar con el servidor" }
             )
             _loading.value = false
+        }
+    }
+
+    fun guardarPrestamoRapido(libro: Libro) {
+        val ahora = System.currentTimeMillis()
+        val devolucion = ahora + 8L * 24 * 60 * 60 * 1000
+        viewModelScope.launch {
+            dao.insert(
+                PrestamoEntity(
+                    libroId = libro.id,
+                    tituloLibro = libro.titulo,
+                    autorLibro = libro.autoresString(),
+                    portadaUrl = libro.portadaUrl,
+                    fechaSolicitud = ahora,
+                    fechaDevolucion = devolucion
+                )
+            )
         }
     }
 }

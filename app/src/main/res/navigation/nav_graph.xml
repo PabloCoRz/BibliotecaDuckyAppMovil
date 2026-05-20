@@ -5,6 +5,10 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
+    <!-- Global actions for drawer navigation -->
+    <action android:id="@+id/action_to_prestamos" app:destination="@id/prestamosFragment" />
+    <action android:id="@+id/action_to_multas" app:destination="@id/multasFragment" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.pablo.ducky.ui.auth.LoginFragment"
@@ -75,5 +79,15 @@
             android:name="libroId"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/prestamosFragment"
+        android:name="com.pablo.ducky.ui.prestamos.PrestamosFragment"
+        android:label="Mis Prestamos" />
+
+    <fragment
+        android:id="@+id/multasFragment"
+        android:name="com.pablo.ducky.ui.multas.MultasFragment"
+        android:label="Mis Multas" />
 
 </navigation>

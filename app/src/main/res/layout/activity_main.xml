@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/cream">
+    android:layout_height="match_parent">
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -12,10 +12,85 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:navGraph="@navigation/nav_graph" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="@color/navy">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:paddingTop="60dp">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/logo_full"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvDrawerEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/cream"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33ffffff"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/drawerPrestamos"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Mis Prestamos"
+            android:textColor="@color/cream"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:paddingStart="24dp"
+            android:background="?attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/drawerMultas"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Mis Multas"
+            android:textColor="@color/cream"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:paddingStart="24dp"
+            android:background="?attr/selectableItemBackground" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33ffffff"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/drawerCerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Cerrar Sesion"
+            android:textColor="@color/gold"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:paddingStart="24dp"
+            android:background="?attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

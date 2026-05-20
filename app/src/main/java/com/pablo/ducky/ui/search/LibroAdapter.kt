@@ -2,13 +2,9 @@ package com.pablo.ducky.ui.search
 
 import android.app.Dialog
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,114 +12,91 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pablo.ducky.R
 import com.pablo.ducky.data.model.Libro
+import com.pablo.ducky.databinding.DialogPrestamoBinding
+import com.pablo.ducky.databinding.ItemLibroBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class LibroAdapter(
-    private val onClick: (Libro) -> Unit
+    private val onClick: (Libro) -> Unit,
+    private val onReserva: (Libro) -> Unit = {}
 ) : ListAdapter<Libro, LibroAdapter.ViewHolder>(DIFF) {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val portada:   ImageView = view.findViewById(R.id.imgPortada)
-        val titulo:    TextView  = view.findViewById(R.id.txtTitulo)
-        val autores:   TextView  = view.findViewById(R.id.txtAutores)
-        val categoria: TextView  = view.findViewById(R.id.txtCategoria)
-        val año:       TextView  = view.findViewById(R.id.txtAnio)
-        val estado:    TextView  = view.findViewById(R.id.txtEstado)
-        val btnPrestamo: TextView = view.findViewById(R.id.btnSolicitarPrestamo)
-    }
+    inner class ViewHolder(val binding: ItemLibroBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_libro, parent, false)
-        return ViewHolder(view)
+        val binding = ItemLibroBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val libro = getItem(position)
-        holder.titulo.text    = libro.titulo
-        holder.autores.text   = libro.autoresString()
-        holder.categoria.text = libro.categoria ?: ""
-        holder.año.text       = libro.anioPub?.toString() ?: "—"
+        val b = holder.binding
+
+        b.txtTitulo.text = libro.titulo
+        b.txtAutores.text = libro.autoresString()
+        b.txtCategoria.text = libro.categoria ?: ""
+        b.txtAnio.text = libro.anioPub?.toString() ?: "—"
 
         if (libro.estaDisponible()) {
-            holder.estado.text = "● Disponible"
-            holder.estado.setTextColor(
-                holder.itemView.context.getColor(R.color.green_disponible)
-            )
-            holder.btnPrestamo.visibility = View.VISIBLE
+            b.txtEstado.text = "● Disponible"
+            b.txtEstado.setTextColor(holder.itemView.context.getColor(R.color.green_disponible))
+            b.btnSolicitarPrestamo.visibility = android.view.View.VISIBLE
         } else {
-            holder.estado.text = "● No disponible"
-            holder.estado.setTextColor(
-                holder.itemView.context.getColor(R.color.red_nodisponible)
-            )
-            holder.btnPrestamo.visibility = View.GONE
+            b.txtEstado.text = "● No disponible"
+            b.txtEstado.setTextColor(holder.itemView.context.getColor(R.color.red_nodisponible))
+            b.btnSolicitarPrestamo.visibility = android.view.View.GONE
         }
 
-        Glide.with(holder.portada)
+        Glide.with(b.imgPortada)
             .load(libro.portadaUrl)
             .placeholder(R.drawable.bg_portada_placeholder)
-            .into(holder.portada)
+            .into(b.imgPortada)
 
         holder.itemView.setOnClickListener { onClick(libro) }
 
-        holder.btnPrestamo.setOnClickListener {
-            showPrestamoDialog(holder.itemView, libro)
+        b.btnSolicitarPrestamo.setOnClickListener {
+            showPrestamoDialog(holder, libro)
         }
     }
 
-    private fun showPrestamoDialog(anchor: View, libro: Libro) {
-        val ctx = anchor.context
+    private fun showPrestamoDialog(holder: ViewHolder, libro: Libro) {
+        val ctx = holder.itemView.context
         val dialog = Dialog(ctx)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val dialogView = LayoutInflater.from(ctx)
-            .inflate(R.layout.dialog_prestamo, null)
-        dialog.setContentView(dialogView)
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        val dialogBinding = DialogPrestamoBinding.inflate(LayoutInflater.from(ctx))
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        // dates
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val today = Calendar.getInstance()
         val devolucion = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, 8) }
 
-        dialogView.findViewById<TextView>(R.id.txtFechaSolicitud).text  = sdf.format(today.time)
-        dialogView.findViewById<TextView>(R.id.txtFechaDevolucion).text = sdf.format(devolucion.time)
-        dialogView.findViewById<TextView>(R.id.txtTituloDialog).text    = libro.titulo
-        dialogView.findViewById<TextView>(R.id.txtSubtituloDialog).text = libro.subtitulo ?: ""
-        dialogView.findViewById<TextView>(R.id.txtAutorDialog).text     = libro.autoresString()
-        dialogView.findViewById<TextView>(R.id.txtDisponiblesDialog).text =
-            "● Disponible · ${libro.disponibles()} ejemplares"
+        dialogBinding.txtFechaSolicitud.text = sdf.format(today.time)
+        dialogBinding.txtFechaDevolucion.text = sdf.format(devolucion.time)
+        dialogBinding.txtTituloDialog.text = libro.titulo
+        dialogBinding.txtSubtituloDialog.text = libro.subtitulo ?: ""
+        dialogBinding.txtAutorDialog.text = libro.autoresString()
+        dialogBinding.txtDisponiblesDialog.text = "● Disponible · ${libro.disponibles()} ejemplares"
 
-        // cover
         Glide.with(ctx)
             .load(libro.portadaUrl)
             .placeholder(R.drawable.bg_portada_placeholder)
-            .into(dialogView.findViewById(R.id.imgPortadaDialog))
+            .into(dialogBinding.imgPortadaDialog)
 
-        // spinner
-        val opciones = listOf("WhatsApp", "Correo Electrónico", "SMS")
+        val opciones = listOf("WhatsApp", "Correo Electronico", "SMS")
         val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_item, opciones)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        dialogView.findViewById<Spinner>(R.id.spinnerComprobante).adapter = spinnerAdapter
+        dialogBinding.spinnerComprobante.adapter = spinnerAdapter
 
-        // buttons
-        dialogView.findViewById<TextView>(R.id.btnHacerReserva).setOnClickListener {
+        dialogBinding.btnHacerReserva.setOnClickListener {
+            onReserva(libro)
             dialog.dismiss()
-            Toast.makeText(
-                ctx,
-                "¡Préstamo solicitado! Recibirás tu comprobante pronto.",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(ctx, "Prestamo solicitado!", Toast.LENGTH_LONG).show()
         }
-
-        dialogView.findViewById<TextView>(R.id.btnCancelar).setOnClickListener {
-            dialog.dismiss()
-        }
+        dialogBinding.btnCancelar.setOnClickListener { dialog.dismiss() }
 
         dialog.show()
     }
